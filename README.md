@@ -154,7 +154,7 @@ Never share this file. Keep it in `.gitignore`.
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/mental-health-backend.git
+git clone https://github.com/your-username/backend.git
 cd backend
 
 # Create and activate virtual environment
@@ -253,10 +253,11 @@ Paper: [GoEmotions (Google)](https://arxiv.org/abs/2005.00547)
 
 ---
 
-> For frontend UI, see upcoming repo: `mental-health-frontend`
+> For frontend UI, see upcoming repo: `frontend`
 
 ```
 
 ---
+
 
 
