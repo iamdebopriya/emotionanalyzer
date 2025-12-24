@@ -66,6 +66,44 @@ Defines the `/analyze` route:
 - Calls the BERT model to get emotions
 - If `user_id` is provided, saves results to Supabase
 
+#### 🧾 History Route — `GET /history/{username}` 🔁
+- Purpose: Return analytics and recent conversations for a given `username` (user_id).
+- Behavior:
+  - Queries the Supabase `emotion` table for `user_id = {username}` ordered by `created_at.desc`.
+  - Computes: total analyses, top emotion (most frequent top emotion), number of sessions in the last 7 days, average emotion distribution, and returns up to 10 most recent conversations with their top emotion and percentage score.
+
+Response shape (example):
+
+```json
+{
+  "analytics": {
+    "total_analyses": 12,
+    "top_emotion": "sadness",
+    "recent_sessions": 3
+  },
+  "average_emotions": {
+    "joy": 0.120,
+    "sadness": 0.420
+  },
+  "recent_conversations": [
+    {
+      "text": "I feel tired",
+      "top_emotion": "sadness",
+      "percentage": 46.2,
+      "timestamp": "2025-12-20T12:34:56Z"
+    }
+  ]
+}
+```
+
+Notes & requirements:
+- Environment variables: `SUPABASE_URL` and `SUPABASE_KEY` must be set (service role key recommended for server-side queries).
+- Supabase table columns expected: `user_id` (text), `text` (text), `emotions` (jsonb), `created_at` (timestamp with timezone).
+- Errors: The route returns 500 when Supabase returns an error or on unexpected exceptions; the response includes an error detail.
+- Usage: This endpoint is intended for the frontend dashboard to display analytics and recent sessions for a signed-in user.
+
+Tip: When testing locally with the frontend, ensure CORS is enabled for your FastAPI app and the `VITE_API_URL` in the frontend points to your backend (see frontend section below).
+
 ### `nlp/emotion_detector.py`
 Loads BERT model from Hugging Face and runs inference:
 - Tokenizes input

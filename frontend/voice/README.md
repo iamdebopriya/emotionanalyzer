@@ -1,12 +1,15 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔗 Frontend (Voice UI)
 
-## Expanding the ESLint configuration
+A compact React + Vite app lives in `frontend/voice`. It provides a microphone-based emotion analyzer and a simple dashboard. Set your backend URL in `.env` using `VITE_API_URL`  then run:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+cd frontend/voice
+npm install
+npm run dev
+```
+
+The dashboard fetches `GET ${VITE_API_URL}/history/{username}` to show analytics and recent conversations.
